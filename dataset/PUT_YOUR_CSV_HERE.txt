@@ -1,0 +1,8 @@
+Rename/copy your actual dataset to:
+
+mental_health.csv
+
+Expected target:
+Mental Health Condition
+
+Expected columns are documented in README.md.

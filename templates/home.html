@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Home | Mental Health ML{% endblock %}
+{% block content %}
+<div class="p-5 mb-4 bg-light rounded-4">
+    <div class="container-fluid py-4">
+        <h1 class="display-6 fw-bold">Student Mental Health Risk Prediction</h1>
+        <p class="lead">
+            A machine-learning based research web application for predicting
+            student mental-health risk levels from lifestyle, academic and
+            self-reported wellbeing factors.
+        </p>
+        <a href="/predict/" class="btn btn-primary btn-lg">Start Prediction</a>
+        <a href="/comparison/" class="btn btn-outline-secondary btn-lg ms-2">View ML Comparison</a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5>ML Prediction</h5>
+                <p>Uses the trained model selected from the comparative experiment.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5>Risk Levels</h5>
+                <p>Normal, Moderate Risk, or High Risk based on your trained target classes.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5>Recommendations</h5>
+                <p>Simple rule-based wellbeing suggestions based on submitted factors.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

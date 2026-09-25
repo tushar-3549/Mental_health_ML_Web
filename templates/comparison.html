@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Model Comparison | Mental Health ML{% endblock %}
+{% block content %}
+<h2>ML Algorithm Comparison</h2>
+<p class="text-muted">Metrics generated from the training dataset and test split.</p>
+
+{% if metrics %}
+<div class="table-responsive">
+<table class="table table-bordered table-hover align-middle">
+<thead class="table-dark">
+<tr>
+<th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1 Score</th>
+</tr>
+</thead>
+<tbody>
+{% for row in metrics %}
+<tr>
+<td>{{ row.model }}</td>
+<td>{{ row.accuracy|floatformat:4 }}</td>
+<td>{{ row.precision|floatformat:4 }}</td>
+<td>{{ row.recall|floatformat:4 }}</td>
+<td>{{ row.f1_score|floatformat:4 }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+{% else %}
+<div class="alert alert-warning">
+No model metrics found. Train the models first:
+<code>python ml_training/train.py</code>
+</div>
+{% endif %}
+{% endblock %}
