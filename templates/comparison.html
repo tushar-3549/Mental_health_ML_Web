@@ -1,34 +1,95 @@
 {% extends "base.html" %}
-{% block title %}Model Comparison | Mental Health ML{% endblock %}
-{% block content %}
-<h2>ML Algorithm Comparison</h2>
-<p class="text-muted">Metrics generated from the training dataset and test split.</p>
 
-{% if metrics %}
-<div class="table-responsive">
-<table class="table table-bordered table-hover align-middle">
-<thead class="table-dark">
-<tr>
-<th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1 Score</th>
-</tr>
-</thead>
-<tbody>
-{% for row in metrics %}
-<tr>
-<td>{{ row.model }}</td>
-<td>{{ row.accuracy|floatformat:4 }}</td>
-<td>{{ row.precision|floatformat:4 }}</td>
-<td>{{ row.recall|floatformat:4 }}</td>
-<td>{{ row.f1_score|floatformat:4 }}</td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
+{% block title %}Model Comparison | Mental Health ML{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h2 class="fw-bold">ML Algorithm Comparison</h2>
+        <p class="text-muted mb-0">
+            Metrics generated from the training dataset and test split.
+        </p>
+    </div>
+
+    {% if metrics %}
+
+    <!-- Metrics Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Model</th>
+                    <th scope="col">Accuracy</th>
+                    <th scope="col">Precision</th>
+                    <th scope="col">Recall</th>
+                    <th scope="col">F1 Score</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for item in metrics %}
+
+                <tr>
+                    <td>
+                        <strong>{{ item.model }}</strong>
+                    </td>
+
+                    <td>
+                        {{ item.accuracy|floatformat:4 }}
+                    </td>
+
+                    <td>
+                        {{ item.precision|floatformat:4 }}
+                    </td>
+
+                    <td>
+                        {{ item.recall|floatformat:4 }}
+                    </td>
+
+                    <td>
+                        <strong>{{ item.f1_score|floatformat:4 }}</strong>
+                    </td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">
+                        No model metrics available.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+
+    {% else %}
+
+    <!-- No Metrics -->
+    <div class="alert alert-warning" role="alert">
+
+        <h5 class="alert-heading">
+            No model metrics found
+        </h5>
+
+        <p class="mb-2">
+            Please train the machine learning models first.
+        </p>
+
+        <code>python ml_training/train.py</code>
+
+    </div>
+
+    {% endif %}
+
 </div>
-{% else %}
-<div class="alert alert-warning">
-No model metrics found. Train the models first:
-<code>python ml_training/train.py</code>
-</div>
-{% endif %}
+
 {% endblock %}
